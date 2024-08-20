@@ -11,7 +11,7 @@ type Menu = {
   label: string;
   active: boolean;
   icon: LucideIcon;
-  submenus: Submenu[];
+  submenus?: Submenu[];
 };
 
 type Group = {
@@ -29,7 +29,6 @@ export function getMenuList(pathname: string): Group[] {
           label: 'Inicio',
           active: pathname.includes('/dashboard'),
           icon: Home,
-          submenus: [],
         },
       ],
     },
@@ -78,14 +77,12 @@ export function getMenuList(pathname: string): Group[] {
           label: 'Users',
           active: pathname.includes('/users'),
           icon: Users,
-          submenus: [],
         },
         {
           href: '/account',
           label: 'Account',
           active: pathname.includes('/account'),
           icon: Settings,
-          submenus: [],
         },
       ],
     },

@@ -32,13 +32,13 @@ interface CollapseMenuButtonProps {
   isOpen: boolean | undefined;
 }
 
-export function CollapseMenuButton({
+export const CollapseMenuButton = ({
   icon: Icon,
   label,
   active,
   submenus,
   isOpen,
-}: CollapseMenuButtonProps) {
+}: CollapseMenuButtonProps) => {
   const isSubmenuActive = submenus.some((submenu) => submenu.active);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(isSubmenuActive);
 
@@ -143,4 +143,4 @@ export function CollapseMenuButton({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
