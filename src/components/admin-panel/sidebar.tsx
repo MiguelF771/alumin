@@ -4,11 +4,11 @@ import { PanelsTopLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/hooks/use-store';
 import { Button } from '@/components/ui/button';
-import { Menu } from '@/components/admin-panel/menu';
+import { Menu } from '@/components/admin-panel/menu/menu';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 import { SidebarToggle } from '@/components/admin-panel/sidebar-toggle';
 
-export function Sidebar() {
+export const Sidebar = () => {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
   if (!sidebar) return null;
@@ -48,4 +48,4 @@ export function Sidebar() {
       </div>
     </aside>
   );
-}
+};

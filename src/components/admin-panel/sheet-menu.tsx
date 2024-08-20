@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { MenuIcon, PanelsTopLeft } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Menu } from '@/components/admin-panel/menu';
+import { Menu } from '@/components/admin-panel/menu/menu';
 import { Sheet, SheetHeader, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-export function SheetMenu() {
+export const SheetMenu = () => {
   return (
     <Sheet>
       <SheetTrigger className="lg:hidden" asChild>
@@ -26,4 +26,4 @@ export function SheetMenu() {
       </SheetContent>
     </Sheet>
   );
-}
+};
