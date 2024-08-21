@@ -1,13 +1,12 @@
 'use client';
 
+import { CollapseMenuButton } from '@/components/admin-panel/menu/collapse-menu-button';
+import { GroupLabel } from '@/components/admin-panel/menu/group-label';
+import { MenuButton } from '@/components/admin-panel/menu/menu-button';
+import { useCurrentMenuContext } from '@/components/admin-panel/menu/menu-context';
+import { SignOutButton } from '@/components/admin-panel/menu/sign-out-button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-
-import { CollapseMenuButton } from './collapse-menu-button';
-import { GroupLabel } from './group-label';
-import { MenuButton } from './menu-button';
-import { useCurrentMenuContext } from './menu-context';
-import { SignOutButton } from './sign-out-button';
 
 interface MenuProps {
   isOpen: boolean;
