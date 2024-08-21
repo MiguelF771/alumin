@@ -1,22 +1,21 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
-import { cn } from '@/lib/utils';
-import { getMenuList } from '@/lib/menu-list';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
+
 import { CollapseMenuButton } from './collapse-menu-button';
-import { SignOutButton } from './sign-out-button';
-import { MenuButton } from './menu-button';
 import { GroupLabel } from './group-label';
+import { MenuButton } from './menu-button';
+import { useCurrentMenuContext } from './menu-context';
+import { SignOutButton } from './sign-out-button';
 
 interface MenuProps {
-  isOpen: boolean | undefined;
+  isOpen: boolean;
+  onClickOption?: ({ id, label }: { id: string; label: string }) => void;
 }
 
-export const Menu = ({ isOpen }: MenuProps) => {
-  const pathname = usePathname();
-  const menuList = getMenuList(pathname);
+export const Menu = ({ isOpen, onClickOption }: MenuProps) => {
+  const { activeMenu, setActiveMenu, menuList } = useCurrentMenuContext();
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
@@ -33,14 +32,30 @@ export const Menu = ({ isOpen }: MenuProps) => {
               ) : (
                 <p className="pb-2"></p>
               )}
-              {menus.map(({ submenus, ...buttonProps }, index) =>
-                submenus === undefined || submenus.length === 0 ? (
+              {menus.map((menu, index) =>
+                menu.mode === 'single' ? (
                   <div className="w-full" key={index}>
-                    <MenuButton {...buttonProps} isOpen={isOpen} />
+                    <MenuButton
+                      {...menu}
+                      onClick={(e) => {
+                        setActiveMenu(e);
+                        if (onClickOption) onClickOption(e);
+                      }}
+                      active={menu.id === activeMenu.id}
+                      isOpen={isOpen}
+                    />
                   </div>
                 ) : (
                   <div className="w-full" key={index}>
-                    <CollapseMenuButton {...buttonProps} submenus={submenus} isOpen={isOpen} />
+                    <CollapseMenuButton
+                      {...menu}
+                      onClick={(e) => {
+                        setActiveMenu(e);
+                        if (onClickOption) onClickOption(e);
+                      }}
+                      activeMenuId={activeMenu.id}
+                      isOpen={isOpen}
+                    />
                   </div>
                 ),
               )}

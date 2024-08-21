@@ -1,90 +1,93 @@
-import { Pen, Users, Settings, Bookmark, SquarePen, Home, LucideIcon } from 'lucide-react';
+import { Clock, Files, LucideIcon, Pen, Settings, TestTube, Trash2 } from 'lucide-react';
 
-type Submenu = {
-  href: string;
+export type BaseMenu = {
+  id: string;
   label: string;
-  active: boolean;
 };
 
-type Menu = {
-  href: string;
+export type SingleMenu = {
+  id: string;
   label: string;
-  active: boolean;
   icon: LucideIcon;
-  submenus?: Submenu[];
 };
+
+export type MultiMenu = {
+  label: string;
+  icon: LucideIcon;
+  submenus: BaseMenu[];
+};
+
+export type Menu = ({ mode: 'single' } & SingleMenu) | ({ mode: 'multi' } & MultiMenu);
 
 type Group = {
   groupLabel: string;
   menus: Menu[];
 };
 
-export function getMenuList(pathname: string): Group[] {
-  return [
-    {
-      groupLabel: '',
-      menus: [
-        {
-          href: '/dashboard',
-          label: 'Inicio',
-          active: pathname.includes('/dashboard'),
-          icon: Home,
-        },
-      ],
-    },
-    {
-      groupLabel: 'Contents',
-      menus: [
-        {
-          href: '',
-          label: 'Posts',
-          active: pathname.includes('/posts'),
-          icon: SquarePen,
-          submenus: [
-            {
-              href: '/posts',
-              label: 'All Posts',
-              active: pathname === '/posts',
-            },
-            {
-              href: '/posts/new',
-              label: 'New Post',
-              active: pathname === '/posts/new',
-            },
-          ],
-        },
-        {
-          href: '/categories',
-          label: 'Categories',
-          active: pathname.includes('/categories'),
-          icon: Bookmark,
-          submenus: [],
-        },
-        {
-          href: '/editor',
-          label: 'Editor',
-          active: pathname.includes('/editor'),
-          icon: Pen,
-          submenus: [],
-        },
-      ],
-    },
-    {
-      groupLabel: 'Settings',
-      menus: [
-        {
-          href: '/users',
-          label: 'Users',
-          active: pathname.includes('/users'),
-          icon: Users,
-        },
-        {
-          href: '/account',
-          label: 'Account',
-          active: pathname.includes('/account'),
-          icon: Settings,
-        },
-      ],
-    },
-  ];
-}
+export type MenuList = Group[];
+
+export const dashboardMenuList: MenuList = [
+  {
+    groupLabel: '',
+    menus: [
+      {
+        id: 'resent-proyects',
+        mode: 'single',
+        label: 'Proyectos recientes',
+        icon: Clock,
+      },
+      {
+        id: 'all-proyects',
+        mode: 'single',
+        label: 'Todos los proyectos',
+        icon: Files,
+      },
+      {
+        id: 'drafts',
+        mode: 'single',
+        label: 'Papelera',
+        icon: Trash2,
+      },
+    ],
+  },
+  {
+    groupLabel: 'Settings',
+    menus: [
+      {
+        id: 'settings',
+        mode: 'single',
+        label: 'Ajustes',
+        icon: Settings,
+      },
+    ],
+  },
+];
+
+export const projectMenuList: MenuList = [
+  {
+    groupLabel: '',
+    menus: [
+      {
+        mode: 'single',
+        id: 'editor',
+        icon: Pen,
+        label: 'Editar',
+      },
+      {
+        mode: 'single',
+        id: 'test',
+        icon: TestTube,
+        label: 'Test',
+      },
+      {
+        mode: 'multi',
+        label: 'Editar',
+        icon: Pen,
+        submenus: [
+          { id: 'submenu1', label: 'Submenu1' },
+          { id: 'submenu2', label: 'Submenu2' },
+        ],
+      },
+    ],
+  },
+];

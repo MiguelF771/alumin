@@ -1,18 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { BaseMenu, SingleMenu } from '@/lib/menu-list';
 import { cn } from '@/lib/utils';
-import { LucideIcon } from 'lucide-react';
-import Link from 'next/link';
 
-interface MenuButtonProps {
+type MenuButtonProps = {
+  isOpen: boolean;
   active: boolean;
-  href: string;
-  isOpen: boolean | undefined;
-  icon: LucideIcon;
-  label: string;
-}
+  onClick: (menu: BaseMenu) => void;
+} & SingleMenu;
 
-export const MenuButton = ({ active, href, isOpen, icon: Icon, label }: MenuButtonProps) => {
+export const MenuButton = ({ id, isOpen, icon: Icon, label, active, onClick }: MenuButtonProps) => {
   return (
     <TooltipProvider disableHoverableContent>
       <Tooltip delayDuration={100}>
@@ -20,21 +17,19 @@ export const MenuButton = ({ active, href, isOpen, icon: Icon, label }: MenuButt
           <Button
             variant={active ? 'secondary' : 'ghost'}
             className="mb-1 h-10 w-full justify-start"
-            asChild
+            onClick={() => onClick({ id, label })}
           >
-            <Link href={href}>
-              <span className={cn(isOpen === false ? '' : 'mr-4')}>
-                <Icon size={18} />
-              </span>
-              <p
-                className={cn(
-                  'max-w-[200px] truncate',
-                  isOpen === false ? '-translate-x-96 opacity-0' : 'translate-x-0 opacity-100',
-                )}
-              >
-                {label}
-              </p>
-            </Link>
+            <span className={cn(isOpen === false ? '' : 'mr-4')}>
+              <Icon size={18} />
+            </span>
+            <p
+              className={cn(
+                'max-w-[200px] truncate',
+                isOpen === false ? '-translate-x-96 opacity-0' : 'translate-x-0 opacity-100',
+              )}
+            >
+              {label}
+            </p>
           </Button>
         </TooltipTrigger>
         {isOpen === false && <TooltipContent side="right">{label}</TooltipContent>}

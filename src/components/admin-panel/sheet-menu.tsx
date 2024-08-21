@@ -1,18 +1,22 @@
-import Link from 'next/link';
+'use client';
 import { MenuIcon, PanelsTopLeft } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
 import { Menu } from '@/components/admin-panel/menu/menu';
-import { Sheet, SheetHeader, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 export const SheetMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="lg:hidden" asChild>
         <Button className="h-8" variant="outline" size="icon">
           <MenuIcon size={20} />
         </Button>
       </SheetTrigger>
+      <SheetTitle />
       <SheetContent className="flex h-full flex-col px-3 sm:w-72" side="left">
         <SheetHeader>
           <Button className="flex items-center justify-center pb-2 pt-1" variant="link" asChild>
@@ -22,7 +26,7 @@ export const SheetMenu = () => {
             </Link>
           </Button>
         </SheetHeader>
-        <Menu isOpen />
+        <Menu isOpen onClickOption={() => setIsOpen(false)} />
       </SheetContent>
     </Sheet>
   );

@@ -1,11 +1,11 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { useStore } from '@/hooks/use-store';
 import { Sidebar } from '@/components/admin-panel/sidebar';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
+import { useStore } from '@/hooks/use-store';
+import { cn } from '@/lib/utils';
 
-export const AdminPanelLayout = ({ children }: { children: React.ReactNode }) => {
+export const PanelLayout = ({ children }: { children: React.ReactNode }) => {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
   if (!sidebar) return null;
