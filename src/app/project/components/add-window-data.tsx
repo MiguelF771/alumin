@@ -31,8 +31,6 @@ export const AddWindowData = ({ nextId, addData }: AddWindowDataProps) => {
           className="grow"
           onClick={() => {
             try {
-              console.log(windowData);
-
               const data = WindowData.parse({ ...windowData, id: nextId });
               addData(data);
               setWindowData(defaultWindowData);
