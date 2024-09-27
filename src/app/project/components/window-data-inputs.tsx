@@ -67,7 +67,7 @@ export const WindowDataInputs = ({ value, onValueChange }: WindowDataInputsProps
         </Label>
         <Textarea
           id="notes-input"
-          value={value.notes}
+          value={value.notes ?? ''}
           onChange={(e) => onValueChange && onValueChange({ ...value, notes: e.target.value })}
         />
       </div>
