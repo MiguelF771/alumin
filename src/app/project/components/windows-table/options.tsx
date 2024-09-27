@@ -3,7 +3,7 @@ import { NotebookText, Pen, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { WindowData } from '@/lib/core/types';
 
-import { useActionDialogs } from '../../hooks/use-dialogs';
+import { useActionDialogs } from '../../hooks/use-action-dialogs';
 
 interface OptionsProps {
   windowData: WindowData;

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { WindowData } from '@/lib/core/types';
 
-import { useActionDialogs } from '../../hooks/use-dialogs';
+import { useActionDialogs } from '../../hooks/use-action-dialogs';
 
 interface MobileOptionsProps {
   windowData: WindowData;
