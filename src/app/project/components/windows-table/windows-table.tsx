@@ -1,6 +1,3 @@
-import { NotebookText, Pen, Trash2 } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -11,18 +8,14 @@ import {
 } from '@/components/ui/table';
 import { WindowData } from '@/lib/core/types';
 
-import { CustomAlertDialog } from '../custom-alert-dialog';
-import { DeleteDialog } from './delete-dialog';
-import { EditDialog } from './edit-dialog';
 import { MobileOptions } from './mobile-options';
+import { Options } from './options';
 
 interface TableDataViewProps {
-  onDelete: (window: WindowData) => void;
-  onEdit: (window: WindowData) => void;
   windows: WindowData[];
 }
 
-export const WindowsTable = ({ windows, onDelete, onEdit }: TableDataViewProps) => {
+export const WindowsTable = ({ windows }: TableDataViewProps) => {
   return (
     <div className="rounded-md border p-1">
       <Table className="lg:text-lg">
@@ -54,35 +47,8 @@ export const WindowsTable = ({ windows, onDelete, onEdit }: TableDataViewProps) 
                 </span>
               </TableCell>
               <TableCell>
-                <div className="hidden justify-end gap-4 md:flex">
-                  {windowData.notes && (
-                    <CustomAlertDialog
-                      asChild
-                      title={`Ventana ${windowData.id}`}
-                      description={windowData.notes}
-                      cancelButton={{ label: 'Cerrar' }}
-                    >
-                      <Button variant="secondary" size="icon">
-                        <NotebookText />
-                      </Button>
-                    </CustomAlertDialog>
-                  )}
-                  <Button asChild variant="secondary" size="icon">
-                    <EditDialog windowData={windowData} onSuccessfulEdition={() => {}}>
-                      <Pen />
-                    </EditDialog>
-                  </Button>
-                  <DeleteDialog
-                    asChild
-                    windowId={String(windowData.id)}
-                    onClick={() => onDelete(windowData)}
-                  >
-                    <Button variant="destructive" size="icon">
-                      <Trash2 />
-                    </Button>
-                  </DeleteDialog>
-                </div>
-                <MobileOptions windowData={windowData} onDelete={onDelete} onEdit={onEdit} />
+                <Options windowData={windowData} />
+                <MobileOptions windowData={windowData} />
               </TableCell>
             </TableRow>
           ))}
