@@ -3,12 +3,12 @@ import dynamic from 'next/dynamic';
 import { useCurrentMenuContext } from '@/components/admin-panel/menu/menu-context';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
-const Editor = dynamic(() => import('./editor'), {
+const Editor = dynamic(() => import('./editor/editor'), {
   ssr: false,
   loading: LoadingSpinner,
 });
 
-const PerfilesCantidad = dynamic(() => import('./perfiles-cantidad'), {
+const ProfilesQuantity = dynamic(() => import('./profiles-quantity'), {
   ssr: false,
   loading: LoadingSpinner,
 });
@@ -20,7 +20,7 @@ export default function ScreenSelector() {
     case 'editor':
       return <Editor />;
     case 'perfiles-cantidad':
-      return <PerfilesCantidad />;
+      return <ProfilesQuantity />;
     default:
       return <></>;
   }
