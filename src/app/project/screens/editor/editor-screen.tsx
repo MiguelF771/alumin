@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { WindowData } from '@/lib/core/types';
 
-import { ActionDialogsProvider } from '../components/action-dialogs/action-dialogs-provider';
-import { AddWindowData } from '../components/add-window-data';
-import { WindowsTable } from '../components/windows-table/windows-table';
+import { ActionDialogsProvider } from './components/action-dialogs/action-dialogs-provider';
+import { AddWindowData } from './components/add-window-data';
+import { WindowsTable } from './components/windows-table/windows-table';
 
 export default function Editor() {
   const [windows, setWindows] = useState<WindowData[]>([]);

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useCurrentMenuContext } from '@/components/admin-panel/menu/menu-context';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
-const Editor = dynamic(() => import('./editor/editor'), {
+const Editor = dynamic(() => import('./editor/editor-screen'), {
   ssr: false,
   loading: LoadingSpinner,
 });
