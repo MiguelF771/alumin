@@ -1,22 +1,33 @@
-import { AlertDialogTriggerProps } from '@radix-ui/react-alert-dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
-import { CustomAlertDialog } from '../custom-alert-dialog';
-
-interface DialogProps extends AlertDialogTriggerProps {
+interface DeleteDialogProps {
   onOpenChange?: (open: boolean) => void;
-  windowId: string;
-  onClick: () => void;
+  windowId: number;
+  onDelete: (id: number) => void;
 }
 
-export const DeleteDialog = ({ windowId, onClick, onOpenChange, ...props }: DialogProps) => {
+export const DeleteDialog = ({ windowId, onDelete, onOpenChange }: DeleteDialogProps) => {
   return (
-    <CustomAlertDialog
-      onOpenChange={onOpenChange}
-      title={`¿Esta seguro de eliminar la ventana ${windowId}?`}
-      description={`Esta acción no se puede deshacer. Esto eliminará permanentemente los datos de la ventana ${windowId}.`}
-      actionButton={{ label: 'Eliminar', onClick }}
-      cancelButton={{ label: 'Cancelar' }}
-      {...props}
-    />
+    <AlertDialog open onOpenChange={onOpenChange}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{`¿Esta seguro de eliminar la ventana ${windowId}?`}</AlertDialogTitle>
+          <AlertDialogDescription>{`Esta acción no se puede deshacer. Esto eliminará permanentemente los datos de la ventana ${windowId}.`}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction onClick={() => onDelete(windowId)}>Eliminar</AlertDialogAction>
+          <AlertDialogCancel>Canelar</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
