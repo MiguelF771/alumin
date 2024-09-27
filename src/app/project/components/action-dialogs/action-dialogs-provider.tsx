@@ -2,9 +2,9 @@ import { createContext, useState } from 'react';
 
 import { WindowData } from '@/lib/core/types';
 
-import { DeleteDialog } from '../windows-table/delete-dialog';
-import { EditDialog } from '../windows-table/edit-dialog';
-import { NotesDialog } from '../windows-table/notes-dialog';
+import { DeleteDialog } from './delete-dialog';
+import { EditDialog } from './edit-dialog';
+import { NotesDialog } from './notes-dialog';
 
 type Dialog = {
   action: 'notes' | 'edit' | 'delete';
